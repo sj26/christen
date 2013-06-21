@@ -1,0 +1,22 @@
+.container
+  h1 Domains
+  p
+    = link_to "Add a Domain", new_domain_path, class: "btn"
+
+  - if @domains.any?
+    table.table.table-striped.table-hover
+      thead
+        tr
+          th Name
+          th
+      tbody
+        - @domains.each do |domain|
+          tr
+            td = link_to domain.name, domain
+            td
+              = link_to "Edit", domain, class: "btn btn-small"
+              | &nbsp;
+              = link_to "Destroy", domain, class: "btn btn-small btn-danger", data: {method: :delete, confirm: "Really?!"}
+
+  - else
+    p.muted None yet!

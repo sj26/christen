@@ -11,10 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130621062349) do
+ActiveRecord::Schema.define(version: 20130621070249) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "domains", force: true do |t|
+    t.integer  "user_id",    null: false
+    t.string   "name",       null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "domains", ["name"], name: "index_domains_on_name", unique: true, using: :btree
+  add_index "domains", ["user_id"], name: "index_domains_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

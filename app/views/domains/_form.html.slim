@@ -1,0 +1,8 @@
+= simple_form_for(@domain, html: {class: "form-horizonal"}) do |form|
+  = form.error_notification
+  .form-inputs
+    = form.input :name, required: true, autofocus: true
+  .form-actions
+    = form.button :submit, "Add Domain"
+    | &nbsp;
+    = link_to "Cancel", domains_path, class: "btn"
