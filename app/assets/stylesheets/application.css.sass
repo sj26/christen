@@ -1,0 +1,29 @@
+@import bootstrap
+@import bootstrap-responsive
+
+body
+  padding-top: 60px
+
+.footer
+  padding: 20px 0
+  margin-top: 20px
+  border-top: 1px solid #e5e5e5
+  background-color: #f5f5f5
+
+  ul
+    margin: 10px 0
+    color: #777
+
+    li
+      display: inline
+
+      &:before
+        display: inline-block
+        content: "\B7"
+        width: 1em
+        text-align: center
+
+      &:first-of-type:before
+        display: none
+
+@import **/*

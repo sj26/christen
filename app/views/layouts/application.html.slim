@@ -1,0 +1,26 @@
+doctype html
+html
+  head
+    title Christen
+    = stylesheet_link_tag :application, media: "all", data: {turbolinks_track: true}
+    = javascript_include_tag :application, data: {turbolinks_track: true}
+    meta name="viewport" content="width=device-width, initial-scale=1.0"
+    = csrf_meta_tags
+
+  body
+    .navbar.navbar-inverse.navbar-fixed-top
+      .navbar-inner
+        .container
+          = link_to "Christen", root_path, class: "brand"
+          ul.nav.pull-right
+            li = link_to "Domains"
+            li = link_to "Certificates"
+            li = link_to "Sign out"
+
+    = yield
+
+    footer.footer
+      .container
+        ul
+          li Copyleft &copy; 2013
+          li = link_to "I made this", "http://sj26.com"
