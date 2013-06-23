@@ -18,7 +18,9 @@ module Christen
         message.each_question do |name, typeclass|
           puts "#{inspect}: Question: #{name.inspect} #{typeclass.inspect}"
           parsed = PublicSuffix.parse(name.to_s)
-          if domain = Domain.find_by_name(parsed.domain)
+          if not parsed.valid?
+            message.rcode = Resolv::DNS::RCode::FormErr
+          elsif domain = Domain.find_by_name(parsed.domain)
             puts "#{inspect}: Domain: #{domain.inspect}"
             domains << domain
             if typeclass == Resolv::DNS::Resource::IN::A
@@ -26,9 +28,14 @@ module Christen
               domain.records.where(type: AddressRecord.sti_name, name: parsed.trd).each do |record|
                 puts "#{inspect}: Record: #{record.inspect}"
                 message.add_answer name, record.ttl, typeclass.new(record.content)
+              end.presence or if parsed.subdomain?
+                domain.records.where(type: AddressRecord.sti_name, name: parsed.trd.sub(/\A[^.]+/, "*")).each do |record|
+                  puts "#{inspect}: Wildcard record: #{record.inspect}"
+                  message.add_answer name, record.ttl, typeclass.new(record.content)
+                end
               end
             end
-            message.rcode = Resolv::DNS::RCode::NoError
+            message.rcode ||= Resolv::DNS::RCode::NoError
           else
             puts "#{inspect}: Domain #{name.to_s.inspect} does not exist."
             message.rcode = Resolv::DNS::RCode::NXDomain
