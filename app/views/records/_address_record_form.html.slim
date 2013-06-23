@@ -1,0 +1,15 @@
+- unless @record.persisted?
+  p Add an "A" record that points your domain or a subdomain to an IP address.
+
+= simple_form_for @record, as: :record, url: domain_records_path(@domain), html: {class: "form-horizontal"} do |form|
+  = form.error_notification
+  = hidden_field_tag :record_type, params[:record_type]
+  .form-inputs
+    - unless @record.persisted?
+      = form.input :name, autofocus: true, hint: "Leave this blank to create a record for #{@domain.name}. You may also use the wildcard (*) here."
+    = form.input :content, required: true, label: "Address", hint: "Example: 1.2.3.4"
+    = form.input :ttl, required: true, label: "TTL (Refresh Rate)", as: :select, collection: [["1 minute", 1.minute], ["10 minutes", 10.minutes], ["1 hour", 1.hour], ["1 day", 1.day]], include_blank: false
+  .form-actions
+    = form.button :submit, (@record.persisted? ? "Save Record" : "Add Record")
+    | &nbsp;
+    = link_to "Cancel", @domain, class: "btn"

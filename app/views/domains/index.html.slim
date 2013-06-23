@@ -8,11 +8,13 @@
       thead
         tr
           th Name
+          th Details
           th
       tbody
         - @domains.each do |domain|
           tr
             td = link_to domain.name, domain
+            td = t("records", count: domain.records_count)
             td
               = link_to "Edit", domain, class: "btn btn-small"
               | &nbsp;

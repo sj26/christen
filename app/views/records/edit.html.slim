@@ -1,0 +1,4 @@
+.container
+  h1 Edit #{@record.humanized_name}
+
+  = render "#{@record.class.name.underscore}_form"

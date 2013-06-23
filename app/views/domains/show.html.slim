@@ -1,7 +1,40 @@
 .container
   h1 = @domain.name
 
+  .pull-right
+    = t "records", count: @domain.records.count
+
   nav
     = link_to "Return to Domains", domains_path, class: "btn"
+    | &nbsp;
+    .btn-group style="display: inline-block"
+      button.btn.dropdown-toggle data-toggle="dropdown" style="float: none"
+        | Add a Record <span class="caret"></span>
+      ul.dropdown-menu
+        - Record::TYPES.each do |type|
+          li = link_to "#{type} Record", new_domain_record_path(@domain, record_type: type)
 
-  p.muted Nothing can be done yet!
+  - if @domain.records.any?
+    table.table.table-striped.table-hover
+      thead
+        tr
+          th Type
+          th Name
+          th TTL
+          th Points to
+          th
+      tbody
+        - @domain.records.each do |record|
+          tr
+            td = record.humanized_type
+            td = record.name
+            td = record.ttl
+            td
+              = record.content
+              = " (P:#{record.priority})" if record.requires_priority?
+            td
+              = link_to "Edit", edit_domain_record_path(@domain, record), class: "btn btn-small"
+              = link_to "Destroy", domain_record_path(@domain, record), class: "btn btn-small btn-danger", data: {method: :delete, confirm: "Really?!"}
+
+  - else
+    p.muted No records yet!
