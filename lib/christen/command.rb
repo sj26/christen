@@ -13,6 +13,8 @@ module Christen
         puts "#{inspect}: Query"
         domains = Set.new
         message.qr = 1
+        message.aa = 1
+        message.ra = 0
         message.each_question do |name, typeclass|
           puts "#{inspect}: Question: #{name.inspect} #{typeclass.inspect}"
           parsed = PublicSuffix.parse(name.to_s)
