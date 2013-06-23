@@ -12,7 +12,7 @@ class RecordsController < ApplicationController
 
   def create
     @record = Record[params.require(:record_type)].create(record_params.merge(domain: @domain))
-    respond_with @domain, @record, location: edit_domain_path(@domain)
+    respond_with @domain, @record, location: @domain
   end
 
   def edit
@@ -21,12 +21,12 @@ class RecordsController < ApplicationController
 
   def update
     @record.update_attributes(record_params)
-    respond_with @domain, @record, location: edit_domain_path(@domain)
+    respond_with @domain, @record, location: @domain
   end
 
   def destroy
     @record.destroy
-    respond_with @domain, @record, location: edit_domain_path(@domain)
+    respond_with @domain, @record, location: @domain
   end
 
 private

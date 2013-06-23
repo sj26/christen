@@ -14,7 +14,7 @@ class DomainsController < ApplicationController
   end
 
   def create
-    respond_with @domain = @domains.create(params.require(:domain).permit(:name)), location: [:edit, @domain]
+    respond_with @domain = @domains.create(params.require(:domain).permit(:name))
   end
 
   def show

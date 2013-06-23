@@ -1,7 +1,7 @@
 - unless @record.persisted?
   p Add an "A" record that points your domain or a subdomain to an IP address.
 
-= simple_form_for @record, as: :record, url: domain_records_path(@domain), html: {class: "form-horizontal"} do |form|
+= simple_form_for [@domain, @record], as: :record, html: {class: "form-horizontal"} do |form|
   = form.error_notification
   = hidden_field_tag :record_type, params[:record_type]
   .form-inputs
