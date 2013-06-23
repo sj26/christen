@@ -10,8 +10,10 @@ gem "skinny"
 # Rails!
 gem 'rails', '4.0.0.rc2'
 
-# Database
+# Database and models
 gem 'pg'
+gem 'public_suffix'
+gem 'addressable', require: 'addressable/uri'
 
 # Assets
 gem 'sass-rails', '~> 4.0.0.rc2'

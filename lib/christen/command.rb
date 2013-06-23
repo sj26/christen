@@ -13,15 +13,18 @@ module Christen
         puts "#{inspect}: Query"
         domains = Set.new
         message.qr = 1
-        message.each_question do |(name, typeclass)|
-          if domain = name.length.times.map { |i| name[-i..-1].join(".") }.reverse.find { |name| Domain.find_by_name(name) }
+        message.each_question do |name, typeclass|
+          puts "#{inspect}: Question: #{name.inspect} #{typeclass.inspect}"
+          parsed = PublicSuffix.parse(name.to_s)
+          if domain = Domain.find_by_name(parsed.domain)
             puts "#{inspect}: Domain: #{domain.inspect}"
             domains << domain
-            case typeclass
-              when Resolv::DNS::Resource::IN::A
-                domain.records.where(type: AddressRecord.sti_name, name: name).each do |record|
-                  message.add_answer name, ttl, data
-                end
+            if typeclass == Resolv::DNS::Resource::IN::A
+              puts "#{inspect}: Looking for address record for: #{parsed.trd.inspect}"
+              domain.records.where(type: AddressRecord.sti_name, name: parsed.trd).each do |record|
+                puts "#{inspect}: Record: #{record.inspect}"
+                message.add_answer name, record.ttl, typeclass.new(record.content)
+              end
             end
             message.rcode = Resolv::DNS::RCode::NoError
           else

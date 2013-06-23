@@ -2,10 +2,17 @@ class Domain < ActiveRecord::Base
   belongs_to :user
   has_many :records, dependent: :destroy
 
+  before_validation { name.downcase! }
+
   validates :user, presence: true
   validates :name, uniqueness: true
+  validate { errors.add :name, "must have a valid TLD" unless PublicSuffix.valid? name }
 
-  before_save { name.downcase! }
+  def public_suffix
+    PublicSuffix.parse name
+  end
+
+  delegate :tld, :sld, :trd, to: :public_suffix
 
   def serial
     created_at.strftime("%Y%m%d%H%M%S%L").to_d
