@@ -11,17 +11,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130621082719) do
+ActiveRecord::Schema.define(version: 20130623094940) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "domains", force: true do |t|
-    t.integer  "user_id",                   null: false
-    t.string   "name",                      null: false
+  create_table "certificates", force: true do |t|
+    t.integer  "domain_id",       null: false
+    t.string   "name",            null: false
+    t.text     "key_pem"
+    t.text     "request_pem"
+    t.text     "certificate_pem"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "records_count", default: 0, null: false
+  end
+
+  add_index "certificates", ["domain_id"], name: "index_certificates_on_domain_id", using: :btree
+
+  create_table "domains", force: true do |t|
+    t.integer  "user_id",                        null: false
+    t.string   "name",                           null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "records_count",      default: 0, null: false
+    t.integer  "certificates_count", default: 0, null: false
   end
 
   add_index "domains", ["name"], name: "index_domains_on_name", unique: true, using: :btree

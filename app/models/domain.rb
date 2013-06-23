@@ -1,6 +1,7 @@
 class Domain < ActiveRecord::Base
   belongs_to :user
   has_many :records, dependent: :destroy
+  has_many :certificates, dependent: :destroy
 
   before_validation { name.downcase! }
 
