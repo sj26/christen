@@ -1,7 +1,7 @@
 class Record < ActiveRecord::Base
   extend InheritenceBaseNaming
 
-  belongs_to :domain
+  belongs_to :domain, counter_cache: true
   has_one :user, through: :domain
 
   validates :domain, presence: true
