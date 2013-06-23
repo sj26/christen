@@ -27,7 +27,7 @@
         - @domain.records.each do |record|
           tr
             td = record.humanized_type
-            td = record.name
+            td = record.humanized_name
             td = record.ttl
             td
               = record.content

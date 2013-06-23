@@ -24,7 +24,7 @@ class Record < ActiveRecord::Base
   end
 
   def humanized_name
-    name.presence || domain.name
+    [name.presence, domain.name].compact.join(".")
   end
 
   def self.requires_priority?

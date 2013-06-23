@@ -5,8 +5,18 @@
   = form.error_notification
   = hidden_field_tag :record_type, params[:record_type]
   .form-inputs
-    - unless @record.persisted?
-      = form.input :name, autofocus: true, hint: "Leave this blank to create a record for #{@domain.name}. You may also use the wildcard (*) here."
+    - if @record.persisted?
+      .control-group.string.required
+        label.control-label Name
+        .controls
+          .uneditable-input
+            = @record.humanized_name
+    - else
+      = form.input :name, class: "input-append" do
+        = form.input_field :name, autofocus: true
+        = content_tag :span, ".#{@domain.name}", class: "add-on abbn"
+        = form.hint "Leave this blank to create a record for #{@domain.name}. You may also use the wildcard (*) here."
+
     = form.input :content, required: true, label: "Address", hint: "Example: 1.2.3.4"
     = form.input :ttl, required: true, label: "TTL (Refresh Rate)", as: :select, collection: [["1 minute", 1.minute], ["10 minutes", 10.minutes], ["1 hour", 1.hour], ["1 day", 1.day]], include_blank: false
   .form-actions
