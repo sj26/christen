@@ -32,7 +32,7 @@ class RecordsController < ApplicationController
 private
 
   def prepare_domain_and_records
-    @domain = current_user.domains.find(params[:domain_id])
+    @domain = current_user.domains.find_by_name!(params[:domain_id])
     @records = @domain.records
   end
 

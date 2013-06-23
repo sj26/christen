@@ -33,6 +33,6 @@ private
   end
 
   def prepare_domain
-    @domain = current_user.domains.find(params[:id])
+    @domain = current_user.domains.find_by_name!(params[:id])
   end
 end

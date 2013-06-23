@@ -6,4 +6,12 @@ class Domain < ActiveRecord::Base
   validates :name, uniqueness: true
 
   before_save { name.downcase! }
+
+  def to_s
+    name
+  end
+
+  def to_param
+    name
+  end
 end
