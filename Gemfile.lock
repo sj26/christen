@@ -38,8 +38,6 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
-    certificate_authority (0.1.6)
-      activemodel (>= 3.0.6)
     closure-compiler (1.1.10)
     coffee-rails (4.0.0)
       coffee-script (>= 2.2.0)
@@ -179,7 +177,6 @@ DEPENDENCIES
   addressable
   bootstrap-sass
   capybara
-  certificate_authority
   closure-compiler
   coffee-rails
   devise (~> 3.0.0.rc)

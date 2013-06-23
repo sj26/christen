@@ -14,7 +14,6 @@ gem 'rails', '4.0.0.rc2'
 gem 'pg'
 gem 'public_suffix'
 gem 'addressable', require: 'addressable/uri'
-gem 'certificate_authority'
 
 # Assets
 gem 'sass-rails', '~> 4.0.0.rc2'
