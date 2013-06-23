@@ -11,6 +11,9 @@
 /db/*.sqlite3
 /db/*.sqlite3-journal
 
+# Ignore the generate keys and certs
+/db/certs/*
+
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
