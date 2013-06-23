@@ -7,6 +7,30 @@ class Domain < ActiveRecord::Base
 
   before_save { name.downcase! }
 
+  def serial
+    created_at.strftime("%Y%m%d%H%M%S%L").to_d
+  end
+
+  def ttl
+    0
+  end
+
+  def refresh
+    1.hour
+  end
+
+  def retry_refresh
+    1.hour
+  end
+
+  def expire
+    1.hour
+  end
+
+  def minimum
+    1.minute
+  end
+
   def to_s
     name
   end

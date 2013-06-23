@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby
+require_relative '../config/environment'
+require "christen/command"
+Christen::Command.run

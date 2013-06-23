@@ -2,6 +2,11 @@ source 'https://rubygems.org'
 
 ruby '2.0.0'
 
+# EventMachine for HTTP and DNS
+gem "eventmachine"
+gem "thin"
+gem "skinny"
+
 # Rails!
 gem 'rails', '4.0.0.rc2'
 
