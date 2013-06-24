@@ -17,7 +17,7 @@ More coming soon.
 
 ## Caveats
 
-This is an incredibly naiive implementation. Real-world usage would involve running an actual DNS server which sensibly caches the records out of rails with triggered cache invalidation. Maybe I'll hook something up with powerdns and the HTTP backend at some point.
+This is an incredibly naiive implementation. Real-world usage would involve running an actual DNS server which sensibly caches the records out of rails with triggered cache invalidation. Maybe I'll hook something up with powerdns and the HTTP backend at some point. The SSL implementation is also horrendously exploitable. The root key should never be on the machine serving this app, and there should be an intermediate certificate signing with a strong revocation list setup. Which is still horrendous. But, fun!
 
 ## License
 
