@@ -12,5 +12,7 @@ Christen::Application.routes.draw do
     root to: redirect("/domains"), as: :authenticated_root
   end
 
+  get :cert, to: "home#cert"
+
   root to: "home#show"
 end
