@@ -24,8 +24,8 @@ module Christen
             puts "#{inspect}: Domain: #{domain.inspect}"
             domains << domain
             if typeclass == Resolv::DNS::Resource::IN::A
-              puts "#{inspect}: Looking for address record for: #{parsed.trd.inspect}"
-              domain.records.where(type: AddressRecord.sti_name, name: parsed.trd).each do |record|
+              puts "#{inspect}: Looking for address record for: #{parsed.trd.to_s.inspect}"
+              domain.records.where(type: AddressRecord.sti_name, name: parsed.trd.to_s).each do |record|
                 puts "#{inspect}: Record: #{record.inspect}"
                 message.add_answer name, record.ttl, typeclass.new(record.content)
               end.presence or if parsed.subdomain?
