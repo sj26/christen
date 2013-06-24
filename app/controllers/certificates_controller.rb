@@ -1,7 +1,7 @@
 class CertificatesController < ApplicationController
   before_filter :authenticate_user!
   before_filter :prepare_domain_and_certificates
-  before_filter :prepare_certificate, only: [:edit, :update, :destroy]
+  before_filter :prepare_certificate, only: [:show]
 
   respond_to :html
 
@@ -15,18 +15,10 @@ class CertificatesController < ApplicationController
     respond_with @domain, @certificate, location: @domain
   end
 
-  def edit
-    respond_with @domain, @certificate
-  end
-
-  def update
-    @certificate.update_attributes(certificate_params)
-    respond_with @domain, @certificate, location: @domain
-  end
-
-  def destroy
-    @certificate.destroy
-    respond_with @domain, @certificate, location: @domain
+  def show
+    respond_to do |format|
+      format.pem { send_data @certificate.certificate.to_pem }
+    end
   end
 
 private
@@ -41,6 +33,6 @@ private
   end
 
   def certificate_params
-    params.require(:certificate).permit(:name, :request_csr)
+    params.require(:certificate).permit(:request_pem)
   end
 end

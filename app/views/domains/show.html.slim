@@ -13,6 +13,8 @@
       ul.dropdown-menu
         - Record::TYPES.each do |type|
           li = link_to "#{type} Record", new_domain_record_path(@domain, record_type: type)
+    | &nbsp;
+    = link_to "Add a Certificate", new_domain_certificate_path(@domain), class: "btn"
 
   - if @domain.records.any?
     table.table.table-striped.table-hover
@@ -38,3 +40,21 @@
 
   - else
     p.muted No records yet!
+
+  h2 Certificates
+
+  - if @domain.certificates.any?
+    table.table.table-striped.table-hover
+      thead
+        tr
+          th Name
+          th Expires
+      tbody
+        - @domain.certificates.each do |certificate|
+          tr
+            td = certificate.humanized_name
+            td = certificate.certificate.not_after.to_s(:short)
+            td = link_to "Download", domain_certificate_path(@domain, certificate, format: "pem"), class: "btn btn-small"
+
+  - else
+    p.muted No certificates yet!
