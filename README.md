@@ -1,0 +1,24 @@
+# Christen
+
+Runs a DNS server with a Rails frontend which can also sign SSL certs.
+
+## Usage
+
+```sh
+$ bin/rake db:setup
+$ bin/christen
+```
+
+You can get to the web interface on http://localhost:2080 and dig the DNS at dns://localhost:2053.
+
+Christen will generate a root key and certificate for you in `db/certs`.
+
+More coming soon.
+
+## Caveats
+
+This is an incredibly naiive implementation. Real-world usage would involve running an actual DNS server which sensibly caches the records out of rails with triggered cache invalidation. Maybe I'll hook something up with powerdns and the HTTP backend at some point.
+
+## License
+
+Copyright © 2013 Samuel Cochran (sj26@sj26.com). Released under the MIT License, see LICENSE for details.
