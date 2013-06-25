@@ -40,6 +40,10 @@ This is an incredibly naiive implementation. Real-world usage would involve runn
 * Add catch-all DNS for captive portal.
 * API.
 
+## Real-world
+
+If you'd like a service like this that's production–ready I can't endorse [DNSimple](https://dnsimple.com) enough. My only affiliation with them is that of a very satisfied customer. If you'd like to try them out, helping me out at the same time, and getting a month of DNS hosting free, use [my referral link](https://dnsimple.com/r/805577b5f8ff18).
+
 ## License
 
 Copyright © 2013 Samuel Cochran (sj26@sj26.com). Released under the MIT License, see LICENSE for details.
