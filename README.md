@@ -1,5 +1,7 @@
 # Christen
 
+Christen a proto–Internet with domain names and certficates.
+
 Runs a DNS server with a Rails frontend which can also sign SSL certs.
 
 ## Usage
