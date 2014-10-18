@@ -1,0 +1,14 @@
+.container
+  h1 Add a Certificate
+
+  p Upload a certificate request for the domain #{@domain.name}. You can add a wildcard subjectAltName if you wish.
+
+  = simple_form_for [@domain, @certificate], html: {class: "form-horizontal"} do |form|
+    = form.error_notification
+    .form-inputs
+      = form.input :request_pem, required: true, label: "Request"
+    .form-actions
+      = form.button :submit, "Add Certificate"
+      | &nbsp;
+      = link_to "Cancel", @domain, class: "btn"
+
